@@ -12,6 +12,16 @@
 #include <iostream>
 #include <ctime>
 
+/// <summary>
+/// Generate a random number.
+/// </summary>
+/// <param name="min">Starting value.</param>
+/// <param name="max">Ending value.</param>
+/// <returns>A random integer between `min` and `max` numbers</returns>
+int generateRandomNumber(int min, int max) {
+    return min + std::rand() % (max - min + 1);
+}
+
 // Prototype interface class for Enemy. That's the root of all Enemy objects here. Every Enemy object inherits
 // props of that class
 class IEnemy {
@@ -23,15 +33,6 @@ public:
     // Must be overriden in children classes, otherwise wouldn't work
     virtual void displayInfo() = 0;
 
-    /// <summary>
-    /// Generate a random number.
-    /// </summary>
-    /// <param name="min">Starting value.</param>
-    /// <param name="max">Ending value.</param>
-    /// <returns>A random integer between `min` and `max` numbers</returns>
-    int generateRandomNumber(int min, int max) const {
-        return min + std::rand() % (max - min + 1);
-    }
 
     std::string type;   // Determines the type of the enemy, i.e. different properties for different Enemy types
     int health;         // Determines the amount of hitpoints needed to kill an Enemy
@@ -45,9 +46,6 @@ class Spider : public IEnemy {
 public:
     // Here, we initialize that class when EnemyFactory design pattern function is called
     Spider() {
-        // Initialize rand() function so we'll get really random variables
-        srand(time(NULL));
-
         type = "spider";
         health = generateRandomNumber(1, 5);
         damage = generateRandomNumber(1, 5);
@@ -56,11 +54,11 @@ public:
     }
     // Here, we override that virtual method. Polymorphism in all it's glory
     void displayInfo() override {
-        std::cout << "Enemy: " << name
-            << "\nType: " << type
-            << "\nHP: " << health
-            << "\nDMG: " << damage
-            << "\nSpeed: " << speed << std::endl;
+        std::cout << "Enemy: "   << name
+                  << "\nType: "  << type
+                  << "\nHP: "    << health
+                  << "\nDMG: "   << damage
+                  << "\nSpeed: " << speed;
     };
     // Private access level means that no other method in all other classes can modify these variables.
     // Encapsulation is responsible for it.
@@ -75,8 +73,6 @@ private:
 class Zombie : public IEnemy {
 public:
     Zombie() {
-        srand(time(NULL));
-
         type = "zombie";
         health = generateRandomNumber(1, 7);
         damage = generateRandomNumber(1, 3);
@@ -84,11 +80,11 @@ public:
         name = "Hungry Zombie";
     }
     void displayInfo() override {
-        std::cout << "Enemy: " << name
-            << "\nType: " << type
-            << "\nHP: " << health
-            << "\nDMG: " << damage
-            << "\nSpeed: " << speed << std::endl;
+        std::cout << "Enemy: "   << name
+                  << "\nType: "  << type
+                  << "\nHP: "    << health
+                  << "\nDMG: "   << damage
+                  << "\nSpeed: " << speed;
     };
 };
 
@@ -99,7 +95,7 @@ IEnemy* EnemyFactory(std::string type) {
     else if (type == "spider") {
         return new Spider;
     }
-}
+ }
 
 /// <summary>
 /// A meta class used for different game-related things.
@@ -107,51 +103,65 @@ IEnemy* EnemyFactory(std::string type) {
 class Game {
 public:
     /// <summary>
-    /// Prints a separator.
+    /// Prints a separation line for a better view.
     /// </summary>
-    void printSep() {
-        std::cout << "====================";
+    /// <param name="startline">`1` if the line starts with a newline character.</param>
+    /// <param name="endline">`1` if the line ends with a newline character.</param>
+    void printSep(bool startline, bool endline) {
+        if (startline) {
+            std::cout << std::endl;
+        }
+        std::cout << "=============================================";
+        if (endline) {
+            std::cout << std::endl;
+        }
+    }
+
+    void start() {
+
     }
 
     /// <summary>
     /// Prints game's logo.
     /// </summary>
     void printLogo() {
-        printSep();
+        printSep(0, 0);
         // Here we use raw output because of "\" characters.
         std::cout << R"(
-____        ____  
-|  _ \ _ __ | __ ) 
-| | | | '_ \|  _ \ 
-| |_| | | | | |_) |
-|____/|_| |_|____/
+            ____        ____  
+            |  _ \ _ __ | __ ) 
+            | | | | '_ \|  _ \ 
+            | |_| | | | | |_) |
+            |____/|_| |_|____/
 
-Dungeons and Battles
+            Dungeons and Battles
 )";
-        printSep();
+        printSep(0, 0);
         std::cout << std::endl;
     }
 };
 
 int main()
 {
+    // Initialize rand() function so we'll get really random variables
+    srand(time(NULL));
+    
     Game game;
-    IEnemy* z = EnemyFactory("zombie");
-    IEnemy* s = EnemyFactory("spider");
+    IEnemy* zombie = EnemyFactory("zombie");
+    IEnemy* spider = EnemyFactory("spider");
 
     srand(time(NULL));
 
     game.printLogo();
-    z->displayInfo();
+    zombie->displayInfo();
 
-    std::cout << std::endl;
+    game.printSep(1, 1);
 
-    s->displayInfo();
-    
+    spider->displayInfo();
 
 
     // Don't forget to clean reserved memory. This is important!
-    delete z;
-    delete s;
+    delete zombie;
+    delete spider;
     return 0;
 }
