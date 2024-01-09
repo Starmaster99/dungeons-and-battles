@@ -10,6 +10,7 @@
 //
 
 #include <iostream>
+#include <ctime>
 
 // Prototype interface class for Enemy. That's the root of all Enemy objects here. Every Enemy object inherits
 // props of that class
@@ -21,6 +22,16 @@ public:
     // a sort of "required" function. For now, a dummy function. 
     // Must be overriden in children classes, otherwise wouldn't work
     virtual void displayInfo() = 0;
+
+    /// <summary>
+    /// Generate a random number.
+    /// </summary>
+    /// <param name="min">Starting value.</param>
+    /// <param name="max">Ending value.</param>
+    /// <returns>A random integer between `min` and `max` numbers</returns>
+    int generateRandomNumber(int min, int max) const {
+        return min + std::rand() % (max - min + 1);
+    }
 
     std::string type;   // Determines the type of the enemy, i.e. different properties for different Enemy types
     int health;         // Determines the amount of hitpoints needed to kill an Enemy
@@ -34,10 +45,13 @@ class Spider : public IEnemy {
 public:
     // Here, we initialize that class when EnemyFactory design pattern function is called
     Spider() {
+        // Initialize rand() function so we'll get really random variables
+        srand(time(NULL));
+
         type = "spider";
-        health = 100;
-        damage = 10;
-        speed = 50;
+        health = generateRandomNumber(1, 5);
+        damage = generateRandomNumber(1, 5);
+        speed = generateRandomNumber(1, 10);
         name = "Silky Spider";
     }
     // Here, we override that virtual method. Polymorphism in all it's glory
@@ -61,10 +75,12 @@ private:
 class Zombie : public IEnemy {
 public:
     Zombie() {
+        srand(time(NULL));
+
         type = "zombie";
-        health = 100;
-        damage = 10;
-        speed = 50;
+        health = generateRandomNumber(1, 7);
+        damage = generateRandomNumber(1, 3);
+        speed = generateRandomNumber(1, 5);
         name = "Hungry Zombie";
     }
     void displayInfo() override {
@@ -85,15 +101,53 @@ IEnemy* EnemyFactory(std::string type) {
     }
 }
 
+/// <summary>
+/// A meta class used for different game-related things.
+/// </summary>
+class Game {
+public:
+    /// <summary>
+    /// Prints a separator.
+    /// </summary>
+    void printSep() {
+        std::cout << "====================";
+    }
+
+    /// <summary>
+    /// Prints game's logo.
+    /// </summary>
+    void printLogo() {
+        printSep();
+        // Here we use raw output because of "\" characters.
+        std::cout << R"(
+____        ____  
+|  _ \ _ __ | __ ) 
+| | | | '_ \|  _ \ 
+| |_| | | | | |_) |
+|____/|_| |_|____/
+
+Dungeons and Battles
+)";
+        printSep();
+        std::cout << std::endl;
+    }
+};
+
 int main()
 {
+    Game game;
     IEnemy* z = EnemyFactory("zombie");
+    IEnemy* s = EnemyFactory("spider");
+
+    srand(time(NULL));
+
+    game.printLogo();
     z->displayInfo();
 
     std::cout << std::endl;
 
-    IEnemy* s = EnemyFactory("spider");
     s->displayInfo();
+    
 
 
     // Don't forget to clean reserved memory. This is important!
