@@ -18,5 +18,11 @@ public:
                   << "\nDMG: "   << damage
                   << "\nSpeed: " << speed;
     };
+private:
+    std::string type;
+    int health;
+    int damage;
+    int speed;
+    std::string name;
 };
 

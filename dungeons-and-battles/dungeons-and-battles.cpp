@@ -12,19 +12,11 @@
 #include <iostream>
 #include <ctime>
 
+#include "Game.h"
 #include "IEnemy.h"
 #include "Zombie.h"
 #include "Spider.h"
-#include "Game.h"
-
-IEnemy* EnemyFactory(std::string type) {
-    if (type == "zombie") {
-        return new Zombie;
-    }
-    else if (type == "spider") {
-        return new Spider;
-    }
-}
+#include "factories.h"
 
 int main()
 {
@@ -37,7 +29,7 @@ int main()
 
     srand(time(NULL));
 
-    game.printLogo();
+    game.start();
     zombie->displayInfo();
 
     game.printSep(1, 1);
@@ -48,5 +40,7 @@ int main()
     // Don't forget to clean reserved memory. This is important!
     delete zombie;
     delete spider;
+
+        
     return 0;
 }

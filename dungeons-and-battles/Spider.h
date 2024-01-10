@@ -15,11 +15,11 @@ public:
     }
     // Here, we override that virtual method. Polymorphism in all it's glory
     void displayInfo() override {
-        std::cout << "Enemy: " << name
-            << "\nType: " << type
-            << "\nHP: " << health
-            << "\nDMG: " << damage
-            << "\nSpeed: " << speed;
+        std::cout << "Enemy: "   << name
+                  << "\nType: "  << type
+                  << "\nHP: "    << health
+                  << "\nDMG: "   << damage
+                  << "\nSpeed: " << speed;
     };
     // Private access level means that no other method in all other classes can modify these variables.
     // Encapsulation is responsible for it.
