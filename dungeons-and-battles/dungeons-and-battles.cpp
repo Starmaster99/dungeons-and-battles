@@ -23,6 +23,7 @@ int main()
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
     
+    int c = 0;  // choice
     Game game;
     IEnemy* zombie = EnemyFactory("zombie");
     IEnemy* spider = EnemyFactory("spider");
@@ -30,13 +31,13 @@ int main()
     srand(time(NULL));
 
     game.start();
-    zombie->displayInfo();
-
-    game.printSep(1, 1);
-
-    spider->displayInfo();
+    std::cin >> c;
+    game.chooseClass(c);
 
 
+    //zombie->displayInfo();
+    //game.printSep(1, 1);
+    //spider->displayInfo();
     // Don't forget to clean reserved memory. This is important!
     delete zombie;
     delete spider;

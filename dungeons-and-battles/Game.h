@@ -19,7 +19,7 @@ public:
         for (int i = 0; i < 116; i++) {
             std::cout << "=";
         }
-        //std::cout << "====================================================================================================================";
+
         if (endline) {
             std::cout << std::endl;
         }
@@ -39,7 +39,7 @@ public:
                                                 |____/|_| |_|____/
 
                                                 Dungeons and Battles
-                                                     v. 0.3.0
+                                                     v. 0.3.1
 )";
         printSep(0, 1);
     }
@@ -48,7 +48,6 @@ public:
     /// Starts the game.
     /// </summary>
     void start() {
-        int n = 0;
         printLogo();
 
         // TODO: make a less depressing story
@@ -61,14 +60,69 @@ public:
         std::cout << "\"Time to venture on\" you thought. \"Maybe I'll finally find her in that cave. They'll pay for everything they did to me\".\n";
 
         std::cout << "\nYou decided to check your equipment. It seems you are a...\n";
-        std::cout << "1. Warrior;\n";
-        std::cout << "2. Archer;\n";
-        std::cout << "3. Mage;\n";
-
-        // TODO: secret class 0. deprived
-
+        std::cout << "1. Warrior\n";
+        std::cout << "2. Archer\n";
+        std::cout << "3. Mage\n";
+        std::cout << "(Choose a number from the list)\n\n";
         
 
+        // TODO: secret class 0. deprived
+    }
+
+    /// <summary>
+    /// Choose player's class.
+    /// </summary>
+    /// <param name="choice">Player's number.</param>
+    /// <returns>Numerical value of player's class, where:
+    ///  - 1: Warrior,
+    ///  - 2: Archer,
+    ///  - 3: Mage,
+    ///  - 0: Deprived.
+    /// </returns>
+    int chooseClass(int choice) {
+        int playerClass = 0;
+
+        switch (choice) {
+        // Warrior
+        case 1:
+            // I couldn't implement damage resistance :(
+            std::cout << "A warrior. What a mighty class you find yourself in. After a few minutes, you located your double-handed greatsword,\n";
+            std::cout << "but shield is nowhere to be found.\n";
+            std::cout << "Now you recall: you have traded your protection piece for a greater firepower. Reckless, yet respectable choice.\n";
+
+            playerClass = 1;
+            break;
+        // Archer
+        case 2:
+            std::cout << "Rusty dagger, short bow and a few arrows - that's everything you got for a self-defense. You are clearly a ranger.\n";
+            std::cout << "The best battles are won before they start.";
+            std::cout << "Swift and lethal shots, nimble movements, precise strikes and deadly reflexes... You'll become a killing machine soon.\n";
+            std::cout << "But your body needs time and practice. Just as it did before.\n";
+
+            playerClass = 2;
+            break;
+        // Mage
+        case 3:
+            std::cout << "Trying to remember something while being still asleep is tough, but you succeeded. Mostly.\n";
+            std::cout << "You are The Magician - wise and powerful sorcerer, who learned a lot from his wanders throughout his life. You've been ";
+            std::cout << "to the darkest places on the earth casting the most complex spells known to Man.\n";
+            std::cout << "Too bad you forgot them all.\n";
+            std::cout << "With a greatstaff in your left hand and a small bag of goods in the right you decided to get up and continue your journey.\n";
+
+            playerClass = 3;
+            break;
+        // Deprived
+        default:
+            std::cout << "You spent a couple of minutes looking for your belongings nowhere to be found.\n";
+            std::cout << "And then a thought has stroken your mind.\n";
+            std::cout << "You are, quite literally, a no one. A Deprived.\n";
+            std::cout << "Your journey is pointless and means nothing. You are not loved by anyone. No one will mourn your death.\n";
+            std::cout << "Having completely nothing, it will be tough should you continue your travels.\n";
+            std::cout << "Forever marked as an outlaw, you decided to continue. What a pitiful choice.\n";
+            playerClass = 0;
+            break;
+        }
+        return playerClass;
     }
 
     /// <summary>
@@ -88,4 +142,6 @@ public:
         std::cout << "\nYou are losing your consciousness from the vast blood loss. They won't get you alive.\n";
         std::cout << "With this thought in mind, you have decided to relax for the last time in your life.\n";
     }
+
+
 };
