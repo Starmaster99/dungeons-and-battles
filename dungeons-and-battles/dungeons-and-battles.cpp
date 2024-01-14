@@ -25,8 +25,10 @@ int main()
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
     
+    // Create game class with type Game so we can use all of its methods
     Game game;
-    // this is required
+
+    // Initialize empty player variable so switch-case lower can fill it
     IHero* player = nullptr;
 
     IEnemy* zombie = EnemyFactory("zombie");
@@ -49,8 +51,16 @@ int main()
     game.printSep(1, 1);
     //spider->displayInfo();
 
+
+
+
+
+
+
+    // Remember to clean after yourself
     delete player;
     delete zombie;
     delete spider;
+    system("pause");
     return 0;
 }
