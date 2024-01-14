@@ -15,7 +15,7 @@ Open the repo's project using visual studio and build it. Then launch the `.exe`
 
 ## Development
 If you wish to help me, you can add some things you think will make the game better. Clone the repo and work on.
-List of things will objectively make the game better:
+List of things that will objectively make the game better:
 - [ ] Translation
 - [ ] More enemies
 - [ ] More classes

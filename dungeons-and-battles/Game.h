@@ -88,14 +88,14 @@ public:
         // Warrior
         case 1:
             // I couldn't implement damage resistance :(
-            std::cout << "A warrior. What a mighty class you find yourself in. After a few minutes, you find and equip your double-handed greatsword,\n";
+            std::cout << "\nA warrior. What a mighty class you find yourself in. After a few minutes, you find and equip your double-handed greatsword,\n";
             std::cout << "but shield is nowhere to be found.\n";
             std::cout << "Now you recall: you chose the sheer power of this massive hunk of metall over your safety. Reckless, yet respectable choice.\n";
             playerClass = 1;
             break;
         // Archer
         case 2:
-            std::cout << "Rusty dagger, short bow and a few arrows - that's everything you got for a self-defense. You are clearly a ranger.\n";
+            std::cout << "\nRusty dagger, short bow and a few arrows - that's everything you got for a self-defense. You are clearly a ranger.\n";
             std::cout << "The best battles are won before they start. ";
             std::cout << "Swift and lethal shots, nimble movements, precise strikes and deadly reflexes... You'll become a killing machine soon.\n";
             std::cout << "But your body needs time and practice. Just as it did before.\n";
@@ -103,7 +103,7 @@ public:
             break;
         // Mage
         case 3:
-            std::cout << "Trying to remember something while being still asleep is tough, but you succeeded. Mostly.\n";
+            std::cout << "\nTrying to remember something while being still asleep is tough, but you succeeded. Mostly.\n";
             std::cout << "You are The Magician - wise and powerful sorcerer, who learned a lot from his wanders throughout his life. You've been ";
             std::cout << "to the darkest places on the earth casting the most complex spells known to Man.\n";
             std::cout << "Too bad you forgot them all.\n";
@@ -112,7 +112,7 @@ public:
             break;
         // Deprived
         default:
-            std::cout << "You spent a couple of minutes looking for your belongings nowhere to be found.\n";
+            std::cout << "\nYou spent a couple of minutes looking for your belongings nowhere to be found.\n";
             std::cout << "And then a thought has stroken your mind.\n";
             std::cout << "You are, quite literally, a no one. A Deprived.\n";
             std::cout << "Your journey is pointless and means nothing. You are not loved by anyone. No one will mourn your death.\n";
@@ -121,16 +121,40 @@ public:
             playerClass = 0;
             break;
         }
-
+        std::cout << "\nYou make some final preparations and decide to enter the damned cave. Things aren't looking great for you, but you've been to worse places.\n";
+        std::cout << "Upon arriving to the entrance, you start hearing deep growls of monsters nearby. Time to show them who's on the top of food chain!\n";
 
         return playerClass;
     }
-
+    void printStats(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
+        std::cout << "\nPlayer" << "\nHP: " << playerHealth << "\nDMG: " << playerDamage << "\nSpeed: " << playerSpeed << std::endl;
+        std::cout << "\n" << enemyName << "\nHP: " << enemyHealth << "\nDMG: " << enemyDamage << "\nSpeed: " << enemySpeed << std::endl;
+    }
     /// <summary>
-    /// Engage with enemy
+    /// Engage with enemy.
     /// </summary>
-    void fight() {
-        
+    /// <param name="playerSpeed">Player's speed.</param>
+    /// <param name="enemySpeed">Enemy's speed.</param>
+    /// <param name="playerDamage">Player's damage.</param>
+    /// <param name="enemyDamage">Enemy's damage.</param>
+    /// <param name="playerHealth">Player's health.</param>
+    /// <param name="enemyHealth">Enemy's health.</param>
+    void fight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
+        printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
+        if (playerSpeed > enemySpeed) {
+            std::cout << "\nYour moves are so fast and smooth you caught your enemy off-guard. It's your chance now. Fight!\n";
+            enemyHealth =- playerDamage;
+            
+        }
+        else if (playerSpeed < enemySpeed) {
+            std::cout << "\nThe enemy has noticed you far sooner than you did and landed its first strike.\n";
+            playerHealth =- enemyHealth;
+        }
+        else if (playerSpeed == enemySpeed) {
+            std::cout << "\nWow! You both noticed each other, but you are a true master of your craft, so you start first.\n";
+            enemyHealth =- playerDamage;
+        }
+        printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
     };
 
     /// <summary>
@@ -138,14 +162,20 @@ public:
     /// </summary>
     /// <returns>1 if attack was dodged, 0 if not</returns>
     bool dodge() {
+        bool isDodged = false;
 
+
+        return isDodged;
     };
 
     /// <summary>
     /// Parry enemy's attack if dodge returned 1
     /// </summary>
-    void parry() {
+    bool parry() {
+        bool isDodged = dodge();
 
+
+        return !isDodged;
     };
 
 
