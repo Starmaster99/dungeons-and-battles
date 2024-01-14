@@ -9,16 +9,16 @@ class IHero {
 public:
     virtual ~IHero() {}
 
-    virtual void inspectSelf()  = 0;    // Check player's characteristics
-    virtual void inspectEnemy() = 0;    // Check enemy's characteristics
-    virtual void fight()        = 0;    // Engage with enemy
-    virtual bool dodge()        = 0;    // Dodge enemy's attack
-    virtual void parry()        = 0;    // Parry enemy's attack if dodge was successful
+    /// <summary>
+    /// Check player's characteristics
+    /// </summary>
+    virtual void inspectSelf() = 0;
 
-    std::string type;   // Player's class type
-    int health;         // Amount of health player has now
-    int damage;         // Player's damage
-    int speed;          // Player's speed, meaning who's move is first
-    int special;        // Amount of arrows, mana, whatever. I don't have much time 
+    std::string type;           // Player's class type
+    int health = 1;             // Amount of health player has now
+    int damage = 1;             // Player's damage
+    int speed = 1;              // Player's speed, meaning who's move is first
+    std::string specialType;    // Type of special: arrows, mana, whatever
+    int specialAmount = 1;      // Amount of said special. I don't have much time 
 };
 

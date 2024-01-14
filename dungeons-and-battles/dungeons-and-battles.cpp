@@ -13,29 +13,43 @@
 #include <ctime>
 
 #include "Game.h"
+#include "factories.h"
 #include "Enemy/IEnemy.h"
 #include "Enemy/Zombie.h"
 #include "Enemy/Spider.h"
-#include "factories.h"
 
 int main()
 {
+    int choice = 0;
+
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
     
     Game game;
+    // this is required
+    IHero* player = nullptr;
+
     IEnemy* zombie = EnemyFactory("zombie");
     IEnemy* spider = EnemyFactory("spider");
 
     game.start();
-    game.chooseClass();
 
+    choice = game.chooseClass();
+    switch (choice) {
+    case 1:     player = HeroFactory("warrior");    break;
+    case 2:     player = HeroFactory("archer");     break;
+    case 3:     player = HeroFactory("mage");       break;
+    default:    player = HeroFactory("deprived");   break;
+    }
+
+    //player->inspectSelf();
+    player->inspectSelf();
 
     //zombie->displayInfo();
-    //game.printSep(1, 1);
+    game.printSep(1, 1);
     //spider->displayInfo();
 
-
+    delete player;
     delete zombie;
     delete spider;
     return 0;

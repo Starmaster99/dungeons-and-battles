@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Enemy/IEnemy.h"
-#include "Resources.h"
+#include "../Resources.h"
 
 /// <summary>
 /// A "child" class of IEnemy interface class. IEnemy here is called a "parent" class. That's all about inheritance
@@ -24,13 +24,4 @@ public:
                   << "\nDMG: "   << damage
                   << "\nSpeed: " << speed;
     };
-    // Private access level means that no other method in all other classes can modify these variables.
-    // Encapsulation is responsible for it.
-/*private:
-    std::string type;
-    int health;
-    int damage;
-    int speed;
-    std::string name;
-    */
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Enemy/IEnemy.h"
-#include "Resources.h"
+#include "../Resources.h"
 
 /// <summary>
 /// A "child" class of IEnemy interface class. IEnemy here is called a "parent" class. That's all about inheritance

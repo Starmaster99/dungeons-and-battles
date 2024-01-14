@@ -127,6 +127,29 @@ public:
     }
 
     /// <summary>
+    /// Engage with enemy
+    /// </summary>
+    void fight() {
+        
+    };
+
+    /// <summary>
+    /// Dodge enemy's attack
+    /// </summary>
+    /// <returns>1 if attack was dodged, 0 if not</returns>
+    bool dodge() {
+
+    };
+
+    /// <summary>
+    /// Parry enemy's attack if dodge returned 1
+    /// </summary>
+    void parry() {
+
+    };
+
+
+    /// <summary>
     /// I have an extreme case of burnout and depression.
     /// </summary>
     void credits() {
