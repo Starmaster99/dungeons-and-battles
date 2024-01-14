@@ -132,11 +132,11 @@
   <ItemGroup>
     <ClInclude Include="factories.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="IHero.h" />
-    <ClInclude Include="IEnemy.h" />
+    <ClInclude Include="Hero\IHero.h" />
+    <ClInclude Include="Enemy\IEnemy.h" />
     <ClInclude Include="Resources.h" />
-    <ClInclude Include="Spider.h" />
-    <ClInclude Include="Zombie.h" />
+    <ClInclude Include="Enemy\Spider.h" />
+    <ClInclude Include="Enemy\Zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

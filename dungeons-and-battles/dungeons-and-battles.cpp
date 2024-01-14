@@ -13,9 +13,9 @@
 #include <ctime>
 
 #include "Game.h"
-#include "IEnemy.h"
-#include "Zombie.h"
-#include "Spider.h"
+#include "Enemy/IEnemy.h"
+#include "Enemy/Zombie.h"
+#include "Enemy/Spider.h"
 #include "factories.h"
 
 int main()

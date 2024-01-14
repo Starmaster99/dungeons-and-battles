@@ -20,13 +20,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IEnemy.h">
+    <ClInclude Include="Enemy\IEnemy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Zombie.h">
+    <ClInclude Include="Enemy\Zombie.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Spider.h">
+    <ClInclude Include="Enemy\Spider.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -35,7 +35,7 @@
     <ClInclude Include="factories.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IHero.h">
+    <ClInclude Include="Hero\IHero.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Resources.h">

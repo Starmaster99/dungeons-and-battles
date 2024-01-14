@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IEnemy.h"
+#include "Enemy/IEnemy.h"
 #include "Resources.h"
 
 /// <summary>

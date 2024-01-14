@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IEnemy.h"
-#include "Zombie.h"
-#include "Spider.h"
+#include "Enemy/IEnemy.h"
+#include "Enemy/Zombie.h"
+#include "Enemy/Spider.h"
 
 /// <summary>
 /// A factory used to build Enemy objects with whom the player interracts
