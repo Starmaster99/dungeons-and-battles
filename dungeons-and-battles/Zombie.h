@@ -1,7 +1,11 @@
 #pragma once
 
 #include "IEnemy.h"
+#include "Resources.h"
 
+/// <summary>
+/// A "child" class of IEnemy interface class. IEnemy here is called a "parent" class. That's all about inheritance
+/// </summary>
 class Zombie : public IEnemy {
 public:
     Zombie() {

@@ -132,8 +132,9 @@
   <ItemGroup>
     <ClInclude Include="factories.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Hero.h" />
+    <ClInclude Include="IHero.h" />
     <ClInclude Include="IEnemy.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="Spider.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>

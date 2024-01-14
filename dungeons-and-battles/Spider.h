@@ -1,11 +1,14 @@
 #pragma once
 
 #include "IEnemy.h"
+#include "Resources.h"
 
-// A "child" class of IEnemy interface class. IEnemy here is called a "parent" class. That's all about inheritance
+/// <summary>
+/// A "child" class of IEnemy interface class. IEnemy here is called a "parent" class. That's all about inheritance
+/// </summary>
 class Spider : public IEnemy {
 public:
-    // Here, we initialize that class when EnemyFactory design pattern function is called
+    // Here, we initialize class Spider when EnemyFactory design pattern function is called
     Spider() {
         type = "spider";
         health = generateRandomNumber(1, 5);
@@ -13,7 +16,7 @@ public:
         speed = generateRandomNumber(1, 10);
         name = "Silky Spider";
     }
-    // Here, we override that virtual method. Polymorphism in all it's glory
+    // Here, we override IEnemy's displayInfo() method. Polymorphism in all it's glory
     void displayInfo() override {
         std::cout << "Enemy: "   << name
                   << "\nType: "  << type
@@ -23,10 +26,11 @@ public:
     };
     // Private access level means that no other method in all other classes can modify these variables.
     // Encapsulation is responsible for it.
-private:
+/*private:
     std::string type;
     int health;
     int damage;
     int speed;
     std::string name;
+    */
 };

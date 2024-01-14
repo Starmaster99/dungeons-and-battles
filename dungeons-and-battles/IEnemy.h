@@ -3,17 +3,9 @@
 #include <iostream>
 
 /// <summary>
-/// Generate a random number.
+/// Prototype interface class for Enemy. That's the root of all Enemy objects here. Every Enemy object inherits
+/// props of that class
 /// </summary>
-/// <param name="min">Starting value.</param>
-/// <param name="max">Ending value.</param>
-/// <returns>A random integer between `min` and `max` numbers</returns>
-int generateRandomNumber(int min, int max) {
-    return min + std::rand() % (max - min + 1);
-}
-
-// Prototype interface class for Enemy. That's the root of all Enemy objects here. Every Enemy object inherits
-// props of that class
 class IEnemy {
 public:
     // Virtual destructor. Used to safely delete objects after the game is completed. The "virtual" part here
@@ -27,6 +19,6 @@ public:
     int health;         // Determines the amount of hitpoints needed to kill an Enemy
     int damage;         // Determines the damage the Enemy deals to Player
     int speed;          // Determines how fast an Enemy moves, meaning who's move is first
-    std::string name;   // Enemy's name
+    std::string name;   // Enemy's in-game name
 };
 
