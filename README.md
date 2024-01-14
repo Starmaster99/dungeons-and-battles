@@ -1,7 +1,7 @@
 # Dungeons and Battles
 Quite small, yet fairly complex C++ text-based console RPG, leveraging OOP principles and design patterns made as a homework project for University of Opole.
 
-Made with <3 by Vladislav Kuznietsov, 2024
+Made with <3 by Vladislav Kuznetsov, 2024
 
 
 ## Installation & usage
@@ -22,8 +22,8 @@ List of things will objectively make the game better:
 - [ ] Artifacts, consumables - item system
 - [ ] Saving and loading game progress system
 - [ ] More ideas
+
 If you wish to contact me, write to starforce AT gmail dot com.
 
 
-## Annotations
 [^1]: I don't think we were allowed to use something other than visual studio 2022. I'll rewrite some portions of code and leverage CMake for building the app. I also want to make it crossplatform.
