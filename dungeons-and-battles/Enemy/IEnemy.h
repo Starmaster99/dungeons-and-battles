@@ -17,9 +17,9 @@ public:
 
 
     std::string type;   // Determines the type of the enemy, i.e. different properties for different Enemy types
-    int health;     // Determines the amount of hitpoints needed to kill an Enemy
-    int damage;     // Determines the damage the Enemy deals to Player
-    int speed;      // Determines how fast an Enemy moves, meaning who's move is first
+    int health;         // Determines the amount of hitpoints needed to kill an Enemy
+    int damage;         // Determines the damage the Enemy deals to Player
+    int speed;          // Determines how fast an Enemy moves, meaning who's move is first
     std::string name;   // Enemy's in-game name
 };
 

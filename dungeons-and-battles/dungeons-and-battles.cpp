@@ -39,7 +39,6 @@ int main()
     //    IEnemy* spider = EnemyFactory("spider");
     turnAmount = generateRandomNumber(1, 4);
 
-
     game.start();
 
     choice = game.chooseClass();
@@ -50,9 +49,7 @@ int main()
     default:    player = HeroFactory("deprived");   break;
     }
 
-    //zombie->displayInfo();
     game.printSep(1, 1);
-    //spider->displayInfo();
 
     tmp = generateRandomNumber(0, 1);
     switch (tmp) {

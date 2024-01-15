@@ -126,12 +126,24 @@ public:
 
         return playerClass;
     }
+
+    /// <summary>
+    /// Print stats of both player and enemy.
+    /// </summary>
+    /// <param name="playerSpeed">Player's speed.</param>
+    /// <param name="enemySpeed">Enemy's speed.</param>
+    /// <param name="playerDamage">Player's damage.</param>
+    /// <param name="enemyDamage">Enemy's damage.</param>
+    /// <param name="playerHealth">Player's health.</param>
+    /// <param name="enemyHealth">Enemy's health.</param>
+    /// <param name="enemyName">Enemy's name.</param>
     void printStats(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
         std::cout << "\nPlayer" << "\nHP: " << playerHealth << "\nDMG: " << playerDamage << "\nSpeed: " << playerSpeed << std::endl;
         std::cout << "\n" << enemyName << "\nHP: " << enemyHealth << "\nDMG: " << enemyDamage << "\nSpeed: " << enemySpeed << std::endl;
     }
+
     /// <summary>
-    /// Engage with enemy.
+    /// Engage with enemy. Currently completely broken.
     /// </summary>
     /// <param name="playerSpeed">Player's speed.</param>
     /// <param name="enemySpeed">Enemy's speed.</param>
@@ -158,7 +170,7 @@ public:
     };
 
     /// <summary>
-    /// Dodge enemy's attack
+    /// Dodge enemy's attack. Is not implemented yet.
     /// </summary>
     /// <returns>1 if attack was dodged, 0 if not</returns>
     bool dodge() {
@@ -169,7 +181,7 @@ public:
     };
 
     /// <summary>
-    /// Parry enemy's attack if dodge returned 1
+    /// Parry enemy's attack if dodge returned 1. Is not implemented yet.
     /// </summary>
     bool parry() {
         bool isDodged = dodge();
