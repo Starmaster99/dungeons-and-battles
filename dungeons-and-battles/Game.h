@@ -126,10 +126,26 @@ public:
 
         return playerClass;
     }
+    /// <summary>
+    /// Prints stats.
+    /// </summary>
+    /// <param name="playerSpeed">Player's speed.</param>
+    /// <param name="enemySpeed">Enemy's speed.</param>
+    /// <param name="playerDamage">Player's damage.</param>
+    /// <param name="enemyDamage">Enemy's damage.</param>
+    /// <param name="playerHealth">Player's health.</param>
+    /// <param name="enemyHealth">Enemy's health.</param>
     void printStats(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
         std::cout << "\nPlayer" << "\nHP: " << playerHealth << "\nDMG: " << playerDamage << "\nSpeed: " << playerSpeed << std::endl;
         std::cout << "\n" << enemyName << "\nHP: " << enemyHealth << "\nDMG: " << enemyDamage << "\nSpeed: " << enemySpeed << std::endl;
     }
+    
+    void prepFight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
+        bool playerTurn = false;
+
+
+    }
+
     /// <summary>
     /// Engage with enemy.
     /// </summary>
@@ -139,22 +155,53 @@ public:
     /// <param name="enemyDamage">Enemy's damage.</param>
     /// <param name="playerHealth">Player's health.</param>
     /// <param name="enemyHealth">Enemy's health.</param>
-    void fight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
+    void fight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName, int* score) {
+
+        bool playerTurn = false;
+
         printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
+
         if (playerSpeed > enemySpeed) {
             std::cout << "\nYour moves are so fast and smooth you caught your enemy off-guard. It's your chance now. Fight!\n";
-            enemyHealth =- playerDamage;
-            
+            enemyHealth = -playerDamage;
+            playerTurn = false;
         }
         else if (playerSpeed < enemySpeed) {
             std::cout << "\nThe enemy has noticed you far sooner than you did and landed its first strike.\n";
-            playerHealth =- enemyHealth;
+            playerHealth = -enemyHealth;
         }
         else if (playerSpeed == enemySpeed) {
             std::cout << "\nWow! You both noticed each other, but you are a true master of your craft, so you start first.\n";
-            enemyHealth =- playerDamage;
+            enemyHealth = -playerDamage;
         }
-        printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
+
+        if (playerHealth <= 0) {
+            std::cout << "\nYou tried your best, but couldn't make it to the end. People die here and there and you are just one little\n";
+            std::cout << "lad who naively thought that you could make the world a better place.\n";
+            std::cout << "Good night sweet prince.\n";
+            *score += 1;
+            return;
+        }
+        if (enemyHealth <= 0) {
+            std::cout << "\nYou absolutely obliterated him, but your main battle is far from finished. You decided to advance...\n";
+            *score += 1;
+            return;
+        }
+
+        while (playerHealth >= 0) {
+            if (playerTurn) {
+                enemyHealth =- playerDamage;
+                playerTurn = false;
+            }
+            else if (!playerTurn) {
+                playerHealth =- enemyHealth;
+                playerTurn = true;
+            }
+            if (enemyHealth <= 0) {
+                *score += 1;
+            }   
+            //printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
+        }
     };
 
     /// <summary>
@@ -178,7 +225,6 @@ public:
         return !isDodged;
     };
 
-
     /// <summary>
     /// I have an extreme case of burnout and depression.
     /// </summary>
@@ -195,6 +241,8 @@ public:
 
         std::cout << "\nYou are losing your consciousness from the vast blood loss. They won't get you alive.\n";
         std::cout << "With this thought in mind, you have decided to relax for the last time in your life.\n";
+        
+        return;
     }
 
 

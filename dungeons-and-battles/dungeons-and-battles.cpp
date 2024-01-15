@@ -20,10 +20,8 @@
 
 int main()
 {
-    int  choice     = 0;
-    bool turn       = false;
-    int  turnAmount = 0;
-    int  tmp        = 0;
+    int choice = 0;
+    int score = 0;
 
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
@@ -35,11 +33,6 @@ int main()
     IHero*  player = nullptr;
     IEnemy* enemy  = nullptr;
 
-    //   IEnemy* zombie = EnemyFactory("zombie");
-    //    IEnemy* spider = EnemyFactory("spider");
-    turnAmount = generateRandomNumber(1, 4);
-
-
     game.start();
 
     choice = game.chooseClass();
@@ -50,27 +43,25 @@ int main()
     default:    player = HeroFactory("deprived");   break;
     }
 
-    //zombie->displayInfo();
     game.printSep(1, 1);
-    //spider->displayInfo();
 
-    tmp = generateRandomNumber(0, 1);
-    switch (tmp) {
+    switch (generateRandomNumber(1, 2)) {
     case 1:     enemy = EnemyFactory("zombie"); break;
     case 2:     enemy = EnemyFactory("spider"); break;
     default:    enemy = EnemyFactory("zombie"); break;
     }
-    
 
-    // Engage!
-    game.fight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
+    // PROBLEM: infinite battles
+    game.fight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name, &score);
 
+    std::cout << enemy->health;
+
+    game.credits();
+    std::cout << "\nScore: " << score << std::endl;
 
     // Remember to clean after yourself
-//    delete player;
-//    delete enemy;
-//    delete zombie;
-//    delete spider;
-//    system("pause");
+    delete player;
+    delete enemy;
+    system("pause");
     return 0;
 }
