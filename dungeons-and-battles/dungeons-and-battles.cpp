@@ -51,8 +51,7 @@ int main()
 
     game.printSep(1, 1);
 
-    tmp = generateRandomNumber(0, 1);
-    switch (tmp) {
+    switch (generateRandomNumber(1, 2)) {
     case 1:     enemy = EnemyFactory("zombie"); break;
     case 2:     enemy = EnemyFactory("spider"); break;
     default:    enemy = EnemyFactory("zombie"); break;
@@ -60,8 +59,34 @@ int main()
     
 
     // Engage!
-    game.fight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
+    game.prepFight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
+    if (player->health <= 0) {
+        game.credits();
+    }
+    if (enemy->health <= 0) {
+        game.credits();
+    }
 
+    for (int i = 0; i < 10; i++) {
+        if (enemy->health <= 0) {
+
+            delete enemy;
+            IEnemy* enemy = nullptr;
+
+            switch (generateRandomNumber(1, 2)) {
+            case 1:     enemy = EnemyFactory("zombie"); break;
+            case 2:     enemy = EnemyFactory("spider"); break;
+            default:    enemy = EnemyFactory("zombie"); break;
+            }
+
+            // Rewrite fight() and prepFight()
+            game.fight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
+        }
+
+        if (player->health <= 0) {
+            game.credits();
+        }
+    }
 
     // Remember to clean after yourself
 //    delete player;

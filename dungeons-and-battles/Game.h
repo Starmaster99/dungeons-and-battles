@@ -151,23 +151,33 @@ public:
     /// <param name="enemyDamage">Enemy's damage.</param>
     /// <param name="playerHealth">Player's health.</param>
     /// <param name="enemyHealth">Enemy's health.</param>
-    void fight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
+    int prepFight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
+        int status = 0; // Decides what to do next
+
         printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
         if (playerSpeed > enemySpeed) {
             std::cout << "\nYour moves are so fast and smooth you caught your enemy off-guard. It's your chance now. Fight!\n";
             enemyHealth =- playerDamage;
-            
+            status = 1;
         }
         else if (playerSpeed < enemySpeed) {
             std::cout << "\nThe enemy has noticed you far sooner than you did and landed its first strike.\n";
             playerHealth =- enemyHealth;
+            status = 2;
         }
         else if (playerSpeed == enemySpeed) {
             std::cout << "\nWow! You both noticed each other, but you are a true master of your craft, so you start first.\n";
             enemyHealth =- playerDamage;
+            status = 1;
         }
         printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
+        return status;
     };
+
+    void fight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName, int status) {
+        printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
+
+    }
 
     /// <summary>
     /// Dodge enemy's attack. Is not implemented yet.
