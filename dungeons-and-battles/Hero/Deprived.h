@@ -6,7 +6,7 @@
 class Deprived : public IHero {
 public:
     Deprived() {
-        type = "deprived";
+        HeroType DEPRIVED;
         health = 1;
         damage = 1;
         speed = 1;
@@ -15,7 +15,7 @@ public:
     }
 
     void inspectSelf() override {
-        std::cout << "Player: " << type
+        std::cout << "Player: " << DEPRIVED
             << "\nHP: " << health
             << "\nDMG: " << damage
             << "\nSpeed: " << speed

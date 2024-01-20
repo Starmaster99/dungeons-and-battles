@@ -8,6 +8,7 @@
 #include "Hero/Archer.h"
 #include "Hero/Mage.h"
 #include "Hero/Deprived.h"
+#include "Resources.h"
 
 /// <summary>
 /// A factory used to build Enemy objects with whom the player interracts
@@ -17,9 +18,12 @@
 /// 2: spider
 /// </param>
 /// <returns></returns>
-IEnemy* EnemyFactory(std::string type) {
-    if      (type == "zombie")  return new Zombie;
-    else if (type == "spider")  return new Spider;
+IEnemy* EnemyFactory(EnemyType type) {
+    switch (type) {
+    case ZOMBIE:    return new Zombie;
+    case SPIDER:    return new Spider;
+    default:        return new Zombie;
+    }
 }
 
 /// <summary>
@@ -33,9 +37,12 @@ IEnemy* EnemyFactory(std::string type) {
 /// 4: Deprived
 /// </param>
 /// <returns></returns>
-IHero* HeroFactory(std::string type) {
-    if      (type == "warrior")  return new Warrior;
-    else if (type == "archer")   return new Archer;
-    else if (type == "mage")     return new Mage;
-    else if (type == "deprived") return new Deprived;
+IHero* HeroFactory(HeroType type) {
+    switch (type) {
+    case WARRIOR:   return new Warrior;
+    case ARCHER:    return new Archer;
+    case MAGE:      return new Mage;
+    case DEPRIVED:  return new Deprived;
+    default:        return new Deprived;
+    }
 }

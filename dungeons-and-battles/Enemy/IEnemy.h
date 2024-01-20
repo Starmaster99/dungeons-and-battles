@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "../Resources.h"
 
 /// <summary>
 /// Prototype interface class for Enemy. That's the root of all Enemy objects here. Every Enemy object inherits
@@ -15,8 +16,7 @@ public:
     // Must be overriden in children classes, otherwise wouldn't work
     virtual void displayInfo() = 0;
 
-
-    std::string type;   // Determines the type of the enemy, i.e. different properties for different Enemy types
+    EnemyType ENEMY;    // Determines the type of the enemy, i.e. different properties for different Enemy types
     int health = 1;     // Determines the amount of hitpoints needed to kill an Enemy
     int damage = 1;     // Determines the damage the Enemy deals to Player
     int speed = 1;      // Determines how fast an Enemy moves, meaning who's move is first

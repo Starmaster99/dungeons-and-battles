@@ -84,38 +84,34 @@ public:
     ///  3: Mage,
     ///  0: Deprived.
     /// </returns>
-    int chooseClass() {
+    HeroType chooseClass() {
         int playerClass;
 
         std::cin >> playerClass;
 
         switch (playerClass) {
-        // Warrior
-        case 1:
+        case WARRIOR:
             // I couldn't implement damage resistance :(
             std::cout << "\nA warrior. What a mighty class you find yourself in. After a few minutes, you find and equip your double-handed greatsword,\n";
             std::cout << "but shield is nowhere to be found.\n";
             std::cout << "Now you recall: you chose the sheer power of this massive hunk of metall over your safety. Reckless, yet respectable choice.\n";
-            playerClass = 1;
-            break;
-        // Archer
-        case 2:
+            return WARRIOR;
+
+        case ARCHER:
             std::cout << "\nRusty dagger, short bow and a few arrows - that's everything you got for a self-defense. You are clearly a ranger.\n";
             std::cout << "The best battles are won before they start. ";
             std::cout << "Swift and lethal shots, nimble movements, precise strikes and deadly reflexes... You'll become a killing machine soon.\n";
             std::cout << "But your body needs time and practice. Just as it did before.\n";
-            playerClass = 2;
-            break;
-        // Mage
-        case 3:
+            return ARCHER;
+
+        case MAGE:
             std::cout << "\nTrying to remember something while being still asleep is tough, but you succeeded. Mostly.\n";
             std::cout << "You are The Magician - wise and powerful sorcerer, who learned a lot from his wanders throughout his life. You've been ";
             std::cout << "to the darkest places on the earth casting the most complex spells known to Man.\n";
             std::cout << "Too bad you forgot them all.\n";
             std::cout << "With a greatstaff in your left hand and a small bag of goods in the right you decided to get up and continue your journey.\n";
-            playerClass = 3;
-            break;
-        // Deprived
+            return MAGE;
+
         default:
             std::cout << "\nYou spent a couple of minutes looking for your belongings nowhere to be found.\n";
             std::cout << "And then a thought has stroken your mind.\n";
@@ -123,13 +119,10 @@ public:
             std::cout << "Your journey is pointless and means nothing. You are not loved by anyone. No one will mourn your death.\n";
             std::cout << "Having completely nothing, it will be tough should you continue your travels.\n";
             std::cout << "Forever marked as an outlaw, you decided to continue. What a pathetic choice.\n";
-            playerClass = 0;
-            break;
+            return DEPRIVED;
         }
-        std::cout << "\nYou make some final preparations and decide to enter the damned cave. Things aren't looking great for you, but you've been to worse places.\n";
-        std::cout << "Upon arriving to the entrance, you start hearing deep growls of monsters nearby. Time to show them who's on the top of food chain!\n";
 
-        return playerClass;
+
     }
 
     /// <summary>

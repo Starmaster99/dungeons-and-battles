@@ -6,7 +6,7 @@
 class Archer : public IHero {
 public:
     Archer() {
-        type = "Archer";
+        HeroType ARCHER;
         health = generateRandomNumber(1, 10);
         damage = generateRandomNumber(1, 10);
         speed = generateRandomNumber(1, 10);
@@ -15,7 +15,7 @@ public:
     }
 
     void inspectSelf() override {
-        std::cout << "Player: " << type
+        std::cout << "Player: " << ARCHER
             << "\nHP: " << health
             << "\nDMG: " << damage
             << "\nSpeed: " << speed

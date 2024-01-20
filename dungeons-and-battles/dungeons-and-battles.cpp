@@ -25,8 +25,8 @@
 
 int main()
 {
-    int choice = 0;
     int score = 0;
+    GameStates state = DEFAULT;
 
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
@@ -40,52 +40,23 @@ int main()
 
     game.start();
 
-    choice = game.chooseClass();
-    switch (choice) {
-    case 1:     player = HeroFactory("warrior");    break;
-    case 2:     player = HeroFactory("archer");     break;
-    case 3:     player = HeroFactory("mage");       break;
-    default:    player = HeroFactory("deprived");   break;
-    }
+    player = HeroFactory(game.chooseClass());
+
+    std::cout << "\nYou make some final preparations and decide to enter the damned cave. Things aren't looking great for you, but you've been to worse places.\n";
+    std::cout << "Upon arriving to the entrance, you start hearing deep growls of monsters nearby. Time to show them who's on the top of food chain!\n";
 
     game.printSep(1, 1);
 
-    switch (generateRandomNumber(1, 2)) {
-    case 1:     enemy = EnemyFactory("zombie"); break;
-    case 2:     enemy = EnemyFactory("spider"); break;
-    default:    enemy = EnemyFactory("zombie"); break;
-    }
+    EnemyType type = static_cast<EnemyType>(generateRandomNumber(1, 2));
+    enemy = EnemyFactory(type);
 
+    game.printStats(player, enemy);
     // Engage!
 //    game.prepFight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
-    game.printStats(player, enemy);
-    if (player->health <= 0) {
-        game.credits();
-    }
-    if (enemy->health <= 0) {
-        game.credits();
-    }
+//    game.printStats(player, enemy);
 
-    for (int i = 0; i < 10; i++) {
-        if (enemy->health <= 0) {
-
-            delete enemy;
-            IEnemy* enemy = nullptr;
-
-            switch (generateRandomNumber(1, 2)) {
-            case 1:     enemy = EnemyFactory("zombie"); break;
-            case 2:     enemy = EnemyFactory("spider"); break;
-            default:    enemy = EnemyFactory("zombie"); break;
-            }
-
-//            game.printStats(&player, &enemy);
-            // Rewrite fight() and prepFight()
-//            game.fight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
-        }
-
-        if (player->health <= 0) {
-            game.credits();
-        }
+    while (state != EXIT) {
+        
     }
 
     // Remember to clean after yourself

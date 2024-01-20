@@ -9,7 +9,7 @@
 class Zombie : public IEnemy {
 public:
     Zombie() {
-        type = "zombie";
+        EnemyType ZOMBIE;
         health = generateRandomNumber(1, 7);
         damage = generateRandomNumber(1, 3);
         speed = generateRandomNumber(1, 5);
@@ -17,7 +17,7 @@ public:
     }
     void displayInfo() override {
         std::cout << "Enemy: "   << name
-                  << "\nType: "  << type
+                  << "\nType: "  << ZOMBIE
                   << "\nHP: "    << health
                   << "\nDMG: "   << damage
                   << "\nSpeed: " << speed;
