@@ -14,6 +14,11 @@
 
 #include "Game.h"
 #include "factories.h"
+#include "Hero/IHero.h"
+#include "Hero/Warrior.h"
+#include "Hero/Archer.h"
+#include "Hero/Mage.h"
+#include "Hero/Deprived.h"
 #include "Enemy/IEnemy.h"
 #include "Enemy/Zombie.h"
 #include "Enemy/Spider.h"
@@ -53,6 +58,7 @@ int main()
 
     // Engage!
 //    game.prepFight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
+    game.printStats(player, enemy);
     if (player->health <= 0) {
         game.credits();
     }
@@ -72,6 +78,7 @@ int main()
             default:    enemy = EnemyFactory("zombie"); break;
             }
 
+//            game.printStats(&player, &enemy);
             // Rewrite fight() and prepFight()
 //            game.fight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
         }

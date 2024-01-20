@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Hero/IHero.h"
+#include "Hero/Warrior.h"
+#include "Hero/Archer.h"
+#include "Hero/Mage.h"
+#include "Hero/Deprived.h"
 #include "Enemy/IEnemy.h"
 #include "Enemy/Zombie.h"
 #include "Enemy/Spider.h"
@@ -130,18 +135,12 @@ public:
     /// <summary>
     /// Print stats of both player and enemy.
     /// </summary>
-    /// <param name="playerSpeed">Player's speed.</param>
-    /// <param name="enemySpeed">Enemy's speed.</param>
-    /// <param name="playerDamage">Player's damage.</param>
-    /// <param name="enemyDamage">Enemy's damage.</param>
-    /// <param name="playerHealth">Player's health.</param>
-    /// <param name="enemyHealth">Enemy's health.</param>
-    /// <param name="enemyName">Enemy's name.</param>
-    void printStats(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
-        std::cout << "\nPlayer" << "\nHP: " << playerHealth << "\nDMG: " << playerDamage << "\nSpeed: " << playerSpeed << std::endl;
-        std::cout << "\n" << enemyName << "\nHP: " << enemyHealth << "\nDMG: " << enemyDamage << "\nSpeed: " << enemySpeed << std::endl;
+    /// <param name="player">Reference to IHero class</param>
+    /// <param name="enemy">Reference to IEnemy class</param>
+    void printStats(IHero* player, IEnemy* enemy) {
+        std::cout << "\nPlayer" << "\nHP: " << player->health << "\nDMG: " << player->damage << "\nSpeed: " << player->speed << std::endl;
+        std::cout << "\n" << enemy->name << "\nHP: " << enemy->health << "\nDMG: " << enemy->damage << "\nSpeed: " << enemy->speed << std::endl;
     }
-
 
 
     /// <summary>
@@ -186,4 +185,4 @@ public:
     }
 
 
-};
+}; 
