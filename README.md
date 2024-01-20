@@ -23,6 +23,8 @@ List of things that will objectively make the game better:
 - [ ] Saving and loading game progress system
 - [ ] More ideas
 
+> **IMPORTANT:** Please, make sure to check project's [docs](https://starmaster99.github.io/dnb-game/html/index.html).
+
 If you wish to contact me, write to starforce AT gmail dot com.
 
 

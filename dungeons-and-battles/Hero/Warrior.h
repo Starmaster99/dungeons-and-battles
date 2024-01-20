@@ -3,6 +3,7 @@
 #include "Hero/IHero.h"
 #include "../Resources.h"
 
+
 class Warrior : public IHero {
 public:
     Warrior() {

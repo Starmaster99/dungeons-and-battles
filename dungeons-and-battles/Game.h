@@ -126,8 +126,9 @@ public:
 
         return playerClass;
     }
+
     /// <summary>
-    /// Prints stats.
+    /// Print stats of both player and enemy.
     /// </summary>
     /// <param name="playerSpeed">Player's speed.</param>
     /// <param name="enemySpeed">Enemy's speed.</param>
@@ -135,77 +136,16 @@ public:
     /// <param name="enemyDamage">Enemy's damage.</param>
     /// <param name="playerHealth">Player's health.</param>
     /// <param name="enemyHealth">Enemy's health.</param>
+    /// <param name="enemyName">Enemy's name.</param>
     void printStats(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
         std::cout << "\nPlayer" << "\nHP: " << playerHealth << "\nDMG: " << playerDamage << "\nSpeed: " << playerSpeed << std::endl;
         std::cout << "\n" << enemyName << "\nHP: " << enemyHealth << "\nDMG: " << enemyDamage << "\nSpeed: " << enemySpeed << std::endl;
     }
-    
-    void prepFight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName) {
-        bool playerTurn = false;
 
 
-    }
 
     /// <summary>
-    /// Engage with enemy.
-    /// </summary>
-    /// <param name="playerSpeed">Player's speed.</param>
-    /// <param name="enemySpeed">Enemy's speed.</param>
-    /// <param name="playerDamage">Player's damage.</param>
-    /// <param name="enemyDamage">Enemy's damage.</param>
-    /// <param name="playerHealth">Player's health.</param>
-    /// <param name="enemyHealth">Enemy's health.</param>
-    void fight(int playerSpeed, int enemySpeed, int playerDamage, int enemyDamage, int playerHealth, int enemyHealth, std::string enemyName, int* score) {
-
-        bool playerTurn = false;
-
-        printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
-
-        if (playerSpeed > enemySpeed) {
-            std::cout << "\nYour moves are so fast and smooth you caught your enemy off-guard. It's your chance now. Fight!\n";
-            enemyHealth = -playerDamage;
-            playerTurn = false;
-        }
-        else if (playerSpeed < enemySpeed) {
-            std::cout << "\nThe enemy has noticed you far sooner than you did and landed its first strike.\n";
-            playerHealth = -enemyHealth;
-        }
-        else if (playerSpeed == enemySpeed) {
-            std::cout << "\nWow! You both noticed each other, but you are a true master of your craft, so you start first.\n";
-            enemyHealth = -playerDamage;
-        }
-
-        if (playerHealth <= 0) {
-            std::cout << "\nYou tried your best, but couldn't make it to the end. People die here and there and you are just one little\n";
-            std::cout << "lad who naively thought that you could make the world a better place.\n";
-            std::cout << "Good night sweet prince.\n";
-            *score += 1;
-            return;
-        }
-        if (enemyHealth <= 0) {
-            std::cout << "\nYou absolutely obliterated him, but your main battle is far from finished. You decided to advance...\n";
-            *score += 1;
-            return;
-        }
-
-        while (playerHealth >= 0) {
-            if (playerTurn) {
-                enemyHealth =- playerDamage;
-                playerTurn = false;
-            }
-            else if (!playerTurn) {
-                playerHealth =- enemyHealth;
-                playerTurn = true;
-            }
-            if (enemyHealth <= 0) {
-                *score += 1;
-            }   
-            //printStats(playerSpeed, enemySpeed, playerDamage, enemyDamage, playerHealth, enemyHealth, enemyName);
-        }
-    };
-
-    /// <summary>
-    /// Dodge enemy's attack
+    /// Dodge enemy's attack. Is not implemented yet.
     /// </summary>
     /// <returns>1 if attack was dodged, 0 if not</returns>
     bool dodge() {
@@ -216,7 +156,7 @@ public:
     };
 
     /// <summary>
-    /// Parry enemy's attack if dodge returned 1
+    /// Parry enemy's attack if dodge returned 1. Is not implemented yet.
     /// </summary>
     bool parry() {
         bool isDodged = dodge();
