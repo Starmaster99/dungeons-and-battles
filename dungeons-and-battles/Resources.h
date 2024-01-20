@@ -5,7 +5,7 @@
 /// <summary>
 /// Enum for game states
 /// </summary>
-enum GameStates {
+enum class GameStates {
     DEFAULT,
     FIGHT,
     EXIT
@@ -14,7 +14,7 @@ enum GameStates {
 /// <summary>
 /// Enum for enemy types. Used by factory to determine which one to generate
 /// </summary>
-enum EnemyType {
+enum class EnemyType {
     ENEMY,
     ZOMBIE,
     SPIDER
@@ -23,12 +23,29 @@ enum EnemyType {
 /// <summary>
 /// Enum for hero tyoes. Used by factory to determine which one to generate
 /// </summary>
-enum HeroType {
+enum class HeroType{
     HERO,
     WARRIOR,
     ARCHER,
     MAGE,
     DEPRIVED
+};
+
+enum class FightState {
+    playerIsFirst,
+    enemyIsFirst,
+    playerIsDead,
+    enemyIsDead
+};
+
+enum class PostFightState {
+    playerWon,
+    enemyWon,
+};
+
+enum class DodgeStatus {
+    dodgeSuccess,
+    dodgeFail
 };
 
 /// <summary>

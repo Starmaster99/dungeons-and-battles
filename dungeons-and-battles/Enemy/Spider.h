@@ -11,7 +11,7 @@ public:
     // Here, we initialize class Spider when EnemyFactory design pattern function is called
     Spider() {
         EnemyType SPIDER;
-        health = generateRandomNumber(1, 5);
+        health = generateRandomNumber(10, 10);
         damage = generateRandomNumber(1, 5);
         speed = generateRandomNumber(1, 10);
         name = "Silky Spider";
@@ -19,7 +19,6 @@ public:
     // Here, we override IEnemy's displayInfo() method. Polymorphism in all it's glory
     void displayInfo() override {
         std::cout << "Enemy: "   << name
-//                  << "\nType: "  << SPIDER
                   << "\nHP: "    << health
                   << "\nDMG: "   << damage
                   << "\nSpeed: " << speed;

@@ -15,7 +15,7 @@ public:
     }
 
     void inspectSelf() override {
-        std::cout << "Player: " << ARCHER
+        std::cout << "Player: "
             << "\nHP: " << health
             << "\nDMG: " << damage
             << "\nSpeed: " << speed

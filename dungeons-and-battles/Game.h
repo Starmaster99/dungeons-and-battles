@@ -46,7 +46,7 @@ public:
                                                 |____/|_| |_|____/
 
                                                 Dungeons and Battles
-                                                     v. 0.4.1
+                                                     v. 1.0.0
 )";
         printSep(0, 1);
     }
@@ -71,7 +71,7 @@ public:
         std::cout << "2. Archer\n";
         std::cout << "3. Mage\n";
         std::cout << "(Choose a number from the list)\n\n";
-        
+
     }
 
     /// <summary>
@@ -88,29 +88,30 @@ public:
         int playerClass;
 
         std::cin >> playerClass;
+        HeroType type = static_cast<HeroType>(playerClass);
 
-        switch (playerClass) {
-        case WARRIOR:
+        switch (type) {
+        case HeroType::WARRIOR:
             // I couldn't implement damage resistance :(
             std::cout << "\nA warrior. What a mighty class you find yourself in. After a few minutes, you find and equip your double-handed greatsword,\n";
             std::cout << "but shield is nowhere to be found.\n";
             std::cout << "Now you recall: you chose the sheer power of this massive hunk of metall over your safety. Reckless, yet respectable choice.\n";
-            return WARRIOR;
+            break;
 
-        case ARCHER:
+        case HeroType::ARCHER:
             std::cout << "\nRusty dagger, short bow and a few arrows - that's everything you got for a self-defense. You are clearly a ranger.\n";
             std::cout << "The best battles are won before they start. ";
             std::cout << "Swift and lethal shots, nimble movements, precise strikes and deadly reflexes... You'll become a killing machine soon.\n";
             std::cout << "But your body needs time and practice. Just as it did before.\n";
-            return ARCHER;
+            break;
 
-        case MAGE:
+        case HeroType::MAGE:
             std::cout << "\nTrying to remember something while being still asleep is tough, but you succeeded. Mostly.\n";
             std::cout << "You are The Magician - wise and powerful sorcerer, who learned a lot from his wanders throughout his life. You've been ";
             std::cout << "to the darkest places on the earth casting the most complex spells known to Man.\n";
             std::cout << "Too bad you forgot them all.\n";
             std::cout << "With a greatstaff in your left hand and a small bag of goods in the right you decided to get up and continue your journey.\n";
-            return MAGE;
+            break;
 
         default:
             std::cout << "\nYou spent a couple of minutes looking for your belongings nowhere to be found.\n";
@@ -119,10 +120,12 @@ public:
             std::cout << "Your journey is pointless and means nothing. You are not loved by anyone. No one will mourn your death.\n";
             std::cout << "Having completely nothing, it will be tough should you continue your travels.\n";
             std::cout << "Forever marked as an outlaw, you decided to continue. What a pathetic choice.\n";
-            return DEPRIVED;
+            break;
         }
+        std::cout << "\nYou make some final preparations and decide to enter the damned cave. Things aren't looking great for you, but you've been to worse places.\n";
+        std::cout << "Upon arriving to the entrance, you start hearing deep growls of monsters nearby. Time to show them who's on the top of food chain!\n";
 
-
+        return type;
     }
 
     /// <summary>
@@ -135,13 +138,54 @@ public:
         std::cout << "\n" << enemy->name << "\nHP: " << enemy->health << "\nDMG: " << enemy->damage << "\nSpeed: " << enemy->speed << std::endl;
     }
 
+    FightState preFight(IHero* player, IEnemy* enemy) {
+        if (player->speed >= enemy->speed) {
+            enemy->health -= player->damage;
+            if (enemy->health <= 0) {
+                return FightState::enemyIsDead;
+            }
+            return FightState::playerIsFirst;
+        }
+        else if (player->speed < enemy->speed) {
+            player->health -= enemy->damage;
+            if (player->health <= 0) {
+                return FightState::playerIsDead;
+            }
+            return FightState::enemyIsFirst;
+        }
+    }
 
+    FightState fight(IHero* player, IEnemy* enemy, FightState state) {
+//        printStats(player, enemy);
+
+        while (enemy->health > 0 && player->health > 0) {
+            if (state == FightState::playerIsFirst) {             
+                player->health -= enemy->damage;
+                std::cout << std::endl << enemy->name << " attacks dealing " << enemy->damage << " damage!\nYour health now is " << player->health << std::endl;
+                state = FightState::enemyIsFirst;
+
+                if (player->health <= 0) {
+                    return FightState::playerIsDead;
+                }
+            }
+            else if (state == FightState::enemyIsFirst) {
+                enemy->health -= player->damage;
+                std::cout << std::endl << "Player attacks dealing " << player->damage << " damage!\n" << enemy->name << "'s health now is " << enemy->health << std::endl;
+                state = FightState::playerIsFirst;
+
+                if (enemy->health <= 0) {
+                    return FightState::enemyIsDead;
+                }
+            }
+        }
+    }
+    /*
     /// <summary>
     /// Dodge enemy's attack. Is not implemented yet.
     /// </summary>
     /// <returns>1 if attack was dodged, 0 if not</returns>
-    bool dodge() {
-        bool isDodged = false;
+    DodgeStatus dodge() {
+        DodgeStatus isDodged;
 
 
         return isDodged;
@@ -156,6 +200,7 @@ public:
 
         return !isDodged;
     };
+    */
 
     /// <summary>
     /// I have an extreme case of burnout and depression.

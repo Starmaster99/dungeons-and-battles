@@ -16,8 +16,7 @@ public:
     /// </summary>
     virtual void inspectSelf() = 0;
 
-//    std::string type;           // Player's class type
-    HeroType HERO;
+    HeroType HERO;              // Hero's type
     int health = 1;             // Amount of health player has now
     int damage = 1;             // Player's damage
     int speed = 1;              // Player's speed, meaning who's move is first

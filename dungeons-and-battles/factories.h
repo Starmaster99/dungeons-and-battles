@@ -20,9 +20,9 @@
 /// <returns></returns>
 IEnemy* EnemyFactory(EnemyType type) {
     switch (type) {
-    case ZOMBIE:    return new Zombie;
-    case SPIDER:    return new Spider;
-    default:        return new Zombie;
+    case EnemyType::ZOMBIE: return new Zombie;
+    case EnemyType::SPIDER: return new Spider;
+    default:                return new Zombie;
     }
 }
 
@@ -39,10 +39,10 @@ IEnemy* EnemyFactory(EnemyType type) {
 /// <returns></returns>
 IHero* HeroFactory(HeroType type) {
     switch (type) {
-    case WARRIOR:   return new Warrior;
-    case ARCHER:    return new Archer;
-    case MAGE:      return new Mage;
-    case DEPRIVED:  return new Deprived;
-    default:        return new Deprived;
+    case HeroType::WARRIOR:     return new Warrior;
+    case HeroType::ARCHER:      return new Archer;
+    case HeroType::MAGE:        return new Mage;
+    case HeroType::DEPRIVED:    return new Deprived;
+    default:                    return new Deprived;
     }
 }

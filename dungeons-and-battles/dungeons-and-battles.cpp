@@ -26,7 +26,8 @@
 int main()
 {
     int score = 0;
-    GameStates state = DEFAULT;
+    GameStates state = GameStates::DEFAULT;
+    FightState fightState;
 
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
@@ -42,21 +43,43 @@ int main()
 
     player = HeroFactory(game.chooseClass());
 
-    std::cout << "\nYou make some final preparations and decide to enter the damned cave. Things aren't looking great for you, but you've been to worse places.\n";
-    std::cout << "Upon arriving to the entrance, you start hearing deep growls of monsters nearby. Time to show them who's on the top of food chain!\n";
-
     game.printSep(1, 1);
 
     EnemyType type = static_cast<EnemyType>(generateRandomNumber(1, 2));
     enemy = EnemyFactory(type);
 
     game.printStats(player, enemy);
-    // Engage!
-//    game.prepFight(player->speed, enemy->speed, player->damage, enemy->damage, player->health, enemy->health, enemy->name);
-//    game.printStats(player, enemy);
 
-    while (state != EXIT) {
-        
+    fightState = game.preFight(player, enemy);
+    if (fightState == FightState::playerIsDead) {
+        state = GameStates::EXIT;
+        game.credits();
+    }
+    /*
+    switch (fightState) {
+    case FightState::playerIsFirst: std::cout << "\nPlayer is first.";   break;
+    case FightState::enemyIsFirst: std::cout << "\nEnemy is first.";     break;
+    case FightState::playerIsDead: std::cout << "\nPlayer is dead.";     game.credits(); break;
+    case FightState::enemyIsDead: std::cout << "\nEnemy is dead.";       break;
+    }
+    */
+    game.printStats(player, enemy);
+
+    while (state == GameStates::DEFAULT) {
+        FightState loopState = game.fight(player, enemy, fightState);
+        game.printStats(player, enemy);
+
+        if (loopState == FightState::enemyIsDead) {
+            score++;
+            delete enemy;
+            enemy = EnemyFactory(type);
+        }
+        else if (loopState == FightState::playerIsDead) {
+            state = GameStates::EXIT;
+            game.credits();
+            game.printSep(1, 1);
+            std::cout << "Final score: " << score << std::endl;
+        }
     }
 
     // Remember to clean after yourself
