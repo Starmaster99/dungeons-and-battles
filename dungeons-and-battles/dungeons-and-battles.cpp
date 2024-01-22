@@ -27,7 +27,7 @@ int main()
 {
     int score = 0;
     GameStates state = GameStates::DEFAULT;
-    FightState fightState;
+    FightState preFight;
 
     // Initialize rand() function so we'll get really random variables
     srand(time(NULL));
@@ -48,26 +48,16 @@ int main()
     EnemyType type = static_cast<EnemyType>(generateRandomNumber(1, 2));
     enemy = EnemyFactory(type);
 
-    game.printStats(player, enemy);
-
-    fightState = game.preFight(player, enemy);
-    if (fightState == FightState::playerIsDead) {
-        state = GameStates::EXIT;
-        game.credits();
-    }
-    /*
-    switch (fightState) {
-    case FightState::playerIsFirst: std::cout << "\nPlayer is first.";   break;
-    case FightState::enemyIsFirst: std::cout << "\nEnemy is first.";     break;
-    case FightState::playerIsDead: std::cout << "\nPlayer is dead.";     game.credits(); break;
-    case FightState::enemyIsDead: std::cout << "\nEnemy is dead.";       break;
-    }
-    */
-    game.printStats(player, enemy);
-
     while (state == GameStates::DEFAULT) {
-        FightState loopState = game.fight(player, enemy, fightState);
-        game.printStats(player, enemy);
+        preFight = game.preFight(player, enemy);
+        if (preFight == FightState::playerIsDead) {
+            score++;
+            state = GameStates::EXIT;
+            game.credits();
+            game.printSep(1, 1);
+            std::cout << "Final score: " << score << std::endl;
+        }
+        FightState loopState = game.fight(player, enemy, preFight);
 
         if (loopState == FightState::enemyIsDead) {
             score++;
@@ -75,6 +65,7 @@ int main()
             enemy = EnemyFactory(type);
         }
         else if (loopState == FightState::playerIsDead) {
+            score++;
             state = GameStates::EXIT;
             game.credits();
             game.printSep(1, 1);

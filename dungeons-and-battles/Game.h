@@ -46,7 +46,7 @@ public:
                                                 |____/|_| |_|____/
 
                                                 Dungeons and Battles
-                                                     v. 1.0.0
+                                                     v. 1.1.0
 )";
         printSep(0, 1);
     }
@@ -134,48 +134,73 @@ public:
     /// <param name="player">Reference to IHero class</param>
     /// <param name="enemy">Reference to IEnemy class</param>
     void printStats(IHero* player, IEnemy* enemy) {
-        std::cout << "\nPlayer" << "\nHP: " << player->health << "\nDMG: " << player->damage << "\nSpeed: " << player->speed << std::endl;
-        std::cout << "\n" << enemy->name << "\nHP: " << enemy->health << "\nDMG: " << enemy->damage << "\nSpeed: " << enemy->speed << std::endl;
+        std::cout << "\nPlayer:" << "\t\t\t" << enemy->name << ":\n";
+        std::cout << "HP: " << player->health << "\t\t\t" << "HP: " << enemy->health << std::endl;
+        std::cout << "DMG: " << player->damage << "\t\tvs\t" << "DMG: " << enemy->damage << std::endl;
+        std::cout << "Speed: " << player->speed << "\t\t" << "Speed: " << enemy->speed << std::endl;
     }
 
     FightState preFight(IHero* player, IEnemy* enemy) {
+        
         if (player->speed >= enemy->speed) {
             enemy->health -= player->damage;
             if (enemy->health <= 0) {
+                std::cout << "\n=== Speed check: critical success ===\n";
+                std::cout << "You absolutely obliterated the poor thing. It couldn't even notice you! Everything happened with a blink of an eye. You mad bastard.\n";
+                printStats(player, enemy);
                 return FightState::enemyIsDead;
             }
+            std::cout << "\n=== Speed check: success ===\n";
+            std::cout << "Your moves are so fast and smooth you caught your enemy off-guard. It's your chance now.\n";
+            printStats(player, enemy);
             return FightState::playerIsFirst;
         }
         else if (player->speed < enemy->speed) {
             player->health -= enemy->damage;
             if (player->health <= 0) {
+                std::cout << "\n=== Speed check: critical failure ===\n";
+                std::cout << "You were so sluggish you couldn't even dodge the basic attacks. While having mortal wounds, you tried running away from your nemesis.\n";
+                printStats(player, enemy);
                 return FightState::playerIsDead;
             }
+            std::cout << "\n=== Speed check: fail ===\n";
+            std::cout << "The enemy has noticed you far sooner than you did and landed its first strike.\n";
+            printStats(player, enemy);
             return FightState::enemyIsFirst;
         }
     }
 
     FightState fight(IHero* player, IEnemy* enemy, FightState state) {
-//        printStats(player, enemy);
-
+        std::cout << "\n=== Let the battle begin! ===\n";
+        printStats(player, enemy);
         while (enemy->health > 0 && player->health > 0) {
-            if (state == FightState::playerIsFirst) {             
+            if (state == FightState::playerIsFirst) {
+                // player first
                 player->health -= enemy->damage;
-                std::cout << std::endl << enemy->name << " attacks dealing " << enemy->damage << " damage!\nYour health now is " << player->health << std::endl;
                 state = FightState::enemyIsFirst;
-
                 if (player->health <= 0) {
+                    std::cout << "\nYou tried to attack, but your efforts are ultimately futile. The enemy is victorious.\n";
+                    std::cout << "You decided to run for your life, but deep inside you know these are your last minutes.\n";
+                    printSep(1, 1);
                     return FightState::playerIsDead;
+                }
+                else {
+                    std::cout << std::endl << enemy->name << " attacks dealing " << enemy->damage << " damage!\nYour health now is " << player->health << std::endl;
                 }
             }
             else if (state == FightState::enemyIsFirst) {
+                // enemy first
                 enemy->health -= player->damage;
-                std::cout << std::endl << "Player attacks dealing " << player->damage << " damage!\n" << enemy->name << "'s health now is " << enemy->health << std::endl;
                 state = FightState::playerIsFirst;
-
                 if (enemy->health <= 0) {
+                    std::cout << "\nYou killed your foe without any regrets. You know for sure his ghost won't be following you.\n";
+                    std::cout << "You decided to advance further in that hellish cave.\n";
+                    printSep(1, 1);
                     return FightState::enemyIsDead;
                 }
+                else {
+                    std::cout << std::endl << "Player attacks dealing " << player->damage << " damage!\n" << enemy->name << "'s health now is " << enemy->health << std::endl;
+                }   
             }
         }
     }
@@ -206,7 +231,7 @@ public:
     /// I have an extreme case of burnout and depression.
     /// </summary>
     void credits() {
-        std::cout << "\nIt was a truly hard fight. One might say, an ultimate test of your skills. But you succeeded.\n";
+        std::cout << "\nIt was a truly hard fight. One might say, an ultimate test of your skills. And you failed.\n";
         std::cout << "You decided to get to the end of that cursed cave. A couple more meters...\n";
         std::cout << "There. You found her. An absolutely disfigured corpse of a young woman. Her clothes are torn apart like they are a dirty rags ";
         std::cout << "and her body is wounded beyond the point of recognition.\n";

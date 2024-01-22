@@ -3,7 +3,7 @@
 #include <iostream>
 
 /// <summary>
-/// Enum for game states
+/// Enum for game states. Decides whether to end the game or not
 /// </summary>
 enum class GameStates {
     DEFAULT,
@@ -21,7 +21,7 @@ enum class EnemyType {
 };
 
 /// <summary>
-/// Enum for hero tyoes. Used by factory to determine which one to generate
+/// Enum for hero types. Used by factory to determine which one to generate
 /// </summary>
 enum class HeroType{
     HERO,
@@ -31,6 +31,9 @@ enum class HeroType{
     DEPRIVED
 };
 
+/// <summary>
+/// Enum for fight states. Used by fight() to decide what to do next
+/// </summary>
 enum class FightState {
     playerIsFirst,
     enemyIsFirst,
@@ -38,11 +41,17 @@ enum class FightState {
     enemyIsDead
 };
 
+/// <summary>
+/// Enum for post-fight states. Used to decide whether the player or enemy has won the battle
+/// </summary>
 enum class PostFightState {
     playerWon,
     enemyWon,
 };
 
+/// <summary>
+/// Enum for dodge states. Currently not implemented
+/// </summary>
 enum class DodgeStatus {
     dodgeSuccess,
     dodgeFail
