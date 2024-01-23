@@ -175,7 +175,7 @@ public:
         printStats(player, enemy);
         while (enemy->health > 0 && player->health > 0) {
             if (state == FightState::playerIsFirst) {
-                // player first
+                // player first 
                 player->health -= enemy->damage;
                 state = FightState::enemyIsFirst;
                 if (player->health <= 0) {
@@ -190,7 +190,22 @@ public:
             }
             else if (state == FightState::enemyIsFirst) {
                 // enemy first
-                enemy->health -= player->damage;
+                std::cout << "\n=== Dodge check ===";
+                DodgeState dodgeRes = dodge();
+                switch (dodgeRes) {
+                case DodgeState::fail:      
+                    player->health -= enemy->damage;    
+                    break;
+                case DodgeState::success:   
+                    enemy->health -= player->damage;
+                    state = FightState::enemyIsFirst;
+                    break;
+                case DodgeState::parry:     
+                    enemy->health -= 2*player->damage;
+                    state = FightState::enemyIsFirst;
+                    break;
+                }
+                    
                 state = FightState::playerIsFirst;
                 if (enemy->health <= 0) {
                     std::cout << "\nYou killed your foe without any regrets. You know for sure his ghost won't be following you.\n";
@@ -198,34 +213,61 @@ public:
                     printSep(1, 1);
                     return FightState::enemyIsDead;
                 }
+                else if (player->health <= 0) {
+                    std::cout << "\nYou tried to attack, but your efforts are ultimately futile. The enemy is victorious.\n";
+                    std::cout << "You decided to run for your life, but deep inside you know these are your last minutes.\n";
+                    printSep(1, 1);
+                    return FightState::playerIsDead;
+                }
                 else {
                     std::cout << std::endl << "Player attacks dealing " << player->damage << " damage!\n" << enemy->name << "'s health now is " << enemy->health << std::endl;
                 }   
             }
         }
     }
-    /*
-    /// <summary>
-    /// Dodge enemy's attack. Is not implemented yet.
-    /// </summary>
-    /// <returns>1 if attack was dodged, 0 if not</returns>
-    DodgeStatus dodge() {
-        DodgeStatus isDodged;
+    
+    DodgeState dodge() {
+        int playerDodgeDir = 1;
+        int enemyAttackDir = generateRandomNumber(1, 4);
+        int possibleDodgeDir[] = { generateRandomNumber(1, 4), generateRandomNumber(1, 4) };
 
+        while (possibleDodgeDir[0] == possibleDodgeDir[1] || possibleDodgeDir[0] == enemyAttackDir || possibleDodgeDir[1] == enemyAttackDir) {
+            possibleDodgeDir[0] = generateRandomNumber(1, 4);
+            possibleDodgeDir[1] = generateRandomNumber(1, 4);
+        }
 
-        return isDodged;
-    };
+        std::cout << "\nYou can see your enemy moving towards you. You can almost sense his next attack.\n";
+        std::cout << "You decide to dodge the attack. You options are:\n";
+        std::cout << "1. Dodge right\n";
+        std::cout << "2. Dodge left\n";
+        std::cout << "3. Jump\n";
+        std::cout << "4. Duck\n";
+        std::cout << "(Choose a number from the list)\n\n";
 
-    /// <summary>
-    /// Parry enemy's attack if dodge returned 1. Is not implemented yet.
-    /// </summary>
-    bool parry() {
-        bool isDodged = dodge();
-
-
-        return !isDodged;
-    };
-    */
+        std::cin >> playerDodgeDir;
+        if (std::cin.fail() || playerDodgeDir < 1 || playerDodgeDir > 4) {
+            std::cin.clear();
+            std::cerr << "\nYou somehow slipped on the rock and fell down skipping the check entirely.\n";
+            return DodgeState::fail;
+        }
+        else if (playerDodgeDir == enemyAttackDir) {
+            std::cout << "\nYour godlike reflexes saved you. Not only have you successfully dodged the ruthless attack inflicted on you,";
+            std::cout << "you even managed parry the attack and hit the enemy in its' weak spot, dealing two times the normal damage.\n";
+            std::cout << "Bravo!\n";
+            return DodgeState::parry;
+        }
+        else if (playerDodgeDir == possibleDodgeDir[0] || playerDodgeDir == possibleDodgeDir[1]) {
+            std::cout << "\nYou managed to dodge the attack just in time. Good job!\n";
+            return DodgeState::success;
+        }
+        else if (playerDodgeDir != possibleDodgeDir[0] || playerDodgeDir != possibleDodgeDir[1]) {
+            std::cout << "\nYou chose the wrong direction. Enemy slashed you.\n";
+            std::cout << "Your: " << playerDodgeDir << std::endl;
+            std::cout << "Correct: " << possibleDodgeDir[0] << ", " << possibleDodgeDir[1] << std::endl;
+            std::cout << "Crit: " << enemyAttackDir << std::endl;
+            return DodgeState::fail;
+        }
+    }
 
     /// <summary>
     /// I have an extreme case of burnout and depression.
@@ -243,8 +285,6 @@ public:
 
         std::cout << "\nYou are losing your consciousness from the vast blood loss. They won't get you alive.\n";
         std::cout << "With this thought in mind, you have decided to relax for the last time in your life.\n";
-        
-        return;
     }
 
 

@@ -56,6 +56,8 @@ int main()
             game.credits();
             game.printSep(1, 1);
             std::cout << "Final score: " << score << std::endl;
+            system("pause");
+            return 0;
         }
         FightState loopState = game.fight(player, enemy, preFight);
 

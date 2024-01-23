@@ -50,6 +50,15 @@ enum class PostFightState {
 };
 
 /// <summary>
+/// 
+/// </summary>
+enum class DodgeState {
+    fail,
+    success,
+    parry
+};
+
+/// <summary>
 /// Enum for dodge states. Currently not implemented
 /// </summary>
 enum class DodgeStatus {
